@@ -1,0 +1,50 @@
+.wrapper {
+  max-width: 46rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.wrapper input {
+  width: 100%;
+  background-color: var(--gray-500);
+  height: 3.375rem;
+  padding: 1rem;
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  color: var(--gray-100);
+  line-height: 1.375rem;
+}
+
+.wrapper input:focus {
+  outline: transparent;
+  box-shadow: 0 0 0 1px var(--purple-dark);
+}
+
+.contentInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  margin-top: -3.8rem;
+}
+
+.contentInput button[type='submit'] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  background-color: var(--blue-dark);
+  color: var(--gray-100);
+
+  height: 3.25rem;
+  padding: 1rem;
+  border-radius: 8px;
+
+  transition: background-color 0.2s;
+}
+
+.contentInput button:hover {
+  background-color: var(--blue);
+}
