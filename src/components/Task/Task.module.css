@@ -1,0 +1,117 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  background: var(--gray-500);
+  border: 1px solid var(--gray-400);
+
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.wrapper + .wrapper {
+  margin-top: 0.75rem;
+}
+
+.wrapper label {
+  display: block;
+  position: relative;
+  padding-left: 2.5rem;
+  line-height: 1.25rem;
+  font-size: 0.875rem;
+
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.contentText {
+  display: inline;
+}
+
+.wrapper input {
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.wrapper label input {
+  visibility: hidden;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  background-color: var(--gray-700);
+  border: 2px solid var(--blue);
+  border-radius: 50%;
+}
+
+.wrapper label:hover input ~ .checkmark {
+  background-color: var(--gray-600);
+  border-color: var(--blue-dark);
+}
+
+.wrapper input:checked ~ .checkmark {
+  background-color: var(--purple-dark);
+  border: none;
+}
+
+.wrapper label:hover input:checked ~ .checkmark {
+  background-color: var(--purple);
+  border: none;
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.wrapper label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.wrapper label .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.textActiveTask {
+  color: var(--gray-100);
+}
+
+.textDisableTask {
+  color: var(--gray-300);
+  text-decoration: line-through;
+}
+
+.wrapper button {
+  background: transparent;
+  color: var(--gray-300);
+
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+
+  transition: color 0.2s;
+}
+
+.wrapper button:hover {
+  color: var(--danger);
+}
