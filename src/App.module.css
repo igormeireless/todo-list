@@ -117,3 +117,9 @@ form button:hover {
   margin-top: 1rem;
   line-height: 1.375rem;
 }
+
+@media (max-width: 768px) {
+  html {
+    font-size: 87.5%;
+  }
+}
