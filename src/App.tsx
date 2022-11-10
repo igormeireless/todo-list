@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { PlusCircle } from 'phosphor-react';
 import { v4 as uuidv4 } from 'uuid';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { Header } from './components/Header';
 import Clipboard from './assets/clipboard.svg';
@@ -16,11 +17,21 @@ interface Task {
   isComplete: boolean;
 }
 
+interface Inputs {
+  task: string;
+}
+
 function App() {
-  const [task, setTask] = useState('');
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  const totalTasks = tasks.reduce(
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<Inputs>();
+
+  const resumeTasks = tasks.reduce(
     (acc, task) => {
       if (task.isComplete) {
         acc.tasksCompleted++;
@@ -35,22 +46,16 @@ function App() {
     }
   );
 
-  function handleChangeTask(value: string) {
-    setTask(value);
-  }
-
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     const newTask: Task = {
       id: uuidv4(),
-      title: task,
+      title: data.task,
       isComplete: false,
     };
 
     setTasks((oldTasks) => [...oldTasks, newTask]);
-    setTask('');
-  }
+    reset();
+  };
 
   function handleToggleTask(id: string) {
     const updatedTasks = tasks.map((task) => ({
@@ -71,13 +76,15 @@ function App() {
       <Header />
 
       <div className={styles.wrapper}>
-        <form onSubmit={handleSubmit}>
-          <input
-            type='text'
-            value={task}
-            placeholder='Adicione uma nova tarefa'
-            onChange={(event) => handleChangeTask(event.target.value)}
-          />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.content}>
+            <input
+              type='text'
+              {...register('task', { required: true })}
+              placeholder='Adicione uma nova tarefa'
+            />
+            {errors.task && <small>Campo obrigatório</small>}
+          </div>
 
           <button type='submit'>
             Criar
@@ -89,12 +96,12 @@ function App() {
           <header className={styles.resume}>
             <div className={styles.contentResume}>
               <h4 className={styles.tasksCreated}>Tarefas criadas</h4>
-              <span>{totalTasks.total}</span>
+              <span>{resumeTasks.total}</span>
             </div>
 
             <div className={styles.contentResume}>
               <h4 className={styles.tasksFinished}>Concluídas</h4>
-              <span>{`${totalTasks.tasksCompleted} de ${totalTasks.total}`}</span>
+              <span>{`${resumeTasks.tasksCompleted} de ${resumeTasks.total}`}</span>
             </div>
           </header>
 
