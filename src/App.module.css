@@ -41,6 +41,7 @@ form input {
 form button[type='submit'] {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 
   background-color: var(--blue-dark);
@@ -121,5 +122,14 @@ form button:hover {
 @media (max-width: 768px) {
   html {
     font-size: 87.5%;
+  }
+
+  form {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  form button[type='submit'] {
+    width: 100%;
   }
 }
