@@ -18,7 +18,11 @@ export function Task({ task, onChangeTask, onRemoveTask }: TaskProps) {
   return (
     <div className={styles.wrapper}>
       <label>
-        <input type='checkbox' onChange={() => onChangeTask(task.id)} />
+        <input
+          type='checkbox'
+          checked={task.isComplete}
+          onChange={() => onChangeTask(task.id)}
+        />
         <span className={styles.checkmark}></span>
         <p
           className={

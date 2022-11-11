@@ -1,6 +1,7 @@
 .wrapper {
+  width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
 
@@ -17,12 +18,10 @@
 
 .wrapper label {
   display: block;
-  word-break: break-word;
   flex-direction: column;
   position: relative;
   padding-left: 2.5rem;
   line-height: 1.25rem;
-  font-size: 0.875rem;
 
   cursor: pointer;
   -webkit-user-select: none;
@@ -33,6 +32,8 @@
 
 .wrapper p {
   display: inline-block;
+  font-size: 0.875rem;
+  word-break: break-word;
 }
 
 .wrapper input {

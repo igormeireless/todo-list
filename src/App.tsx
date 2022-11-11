@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { PlusCircle } from 'phosphor-react';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -24,6 +24,8 @@ interface Inputs {
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
+  const LOCAL_STORAGE_KEY = '@todo-list:tasks';
+
   const {
     register,
     handleSubmit,
@@ -46,30 +48,72 @@ function App() {
     }
   );
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  function getTasks() {
+    return localStorage.getItem(LOCAL_STORAGE_KEY);
+  }
+
+  function addTasks(value: Task[]) {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(value));
+  }
+
+  const onSubmit: SubmitHandler<Inputs> = (newData) => {
     const newTask: Task = {
       id: uuidv4(),
-      title: data.task,
+      title: newData.task,
       isComplete: false,
     };
 
-    setTasks((oldTasks) => [...oldTasks, newTask]);
-    reset();
+    try {
+      const data = getTasks();
+      const currentData = data ? JSON.parse(data) : [];
+
+      const dataFormatted = [newTask, ...currentData];
+
+      addTasks(dataFormatted);
+      setTasks(dataFormatted);
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   function handleToggleTask(id: string) {
-    const updatedTasks = tasks.map((task) => ({
-      ...task,
-      isComplete: task.id === id ? !task.isComplete : task.isComplete,
-    }));
+    try {
+      const data = getTasks();
+      const currentData: Task[] = data ? JSON.parse(data) : [];
 
-    setTasks(updatedTasks);
+      const updatedTasks = currentData.map((task) => ({
+        ...task,
+        isComplete: task.id === id ? !task.isComplete : task.isComplete,
+      }));
+
+      addTasks(updatedTasks);
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handleRemoveTask(id: string) {
-    const newTask = tasks.filter((task) => task.id !== id);
-    setTasks(newTask);
+    try {
+      const data = getTasks();
+      const currentData: Task[] = data ? JSON.parse(data) : [];
+
+      const newTask = currentData.filter((task) => task.id !== id);
+
+      addTasks(newTask);
+      setTasks(newTask);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  useEffect(() => {
+    const data = getTasks();
+    const currentData = data ? JSON.parse(data) : [];
+
+    setTasks(currentData);
+  }, []);
 
   return (
     <div>
