@@ -17,3 +17,7 @@ O **TodoList** é um aplicativo web para gestão de tarefas. Nele é possível c
 - [x] Utilização do [heact-rook-form](https://react-hook-form.com/get-started) para lidar com formulário.
 - [x] Aplicação de responsividade.
 - [ ] Persistência de dados no [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
+
+<div align="center">
+  <small>Igor Meireles Saraiva - 2022</small>
+</div>
