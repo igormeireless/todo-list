@@ -8,10 +8,12 @@
 
 ### Sobre
 
-O **TodoList** é um aplicativo web para organização de tarefas.
+O **TodoList** é um aplicativo web para gestão de tarefas. Nele é possível criar novas tarefas e marcá-las como concluídas.
 
 ### Ferramentas, Técnicas e Bibliotecas da API:
 
 - [x] Utilização do [phosphor-react](https://github.com/phosphor-icons/phosphor-react) para ícones flexíveis;
 - [x] Utilização do [uuid](https://www.npmjs.com/package/uuid) para geração de IDs dinâmicos;
 - [x] Utilização do [heact-rook-form](https://react-hook-form.com/get-started) para lidar com formulário.
+- [x] Aplicação de responsividade.
+- [ ] Persistência de dados no [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
